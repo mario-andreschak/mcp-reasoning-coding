@@ -18,6 +18,8 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.36.2",
+    "@google/generative-ai": "^0.21.0",
+    "@google-cloud/vertexai": "^1.9.3",
     "@modelcontextprotocol/sdk": "0.6.0",
     "dotenv": "^16.4.7",
     "openai": "^4.80.1",

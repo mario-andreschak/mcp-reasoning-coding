@@ -1,0 +1,506 @@
+{
+    "anthropic": {
+      "claude-3-5-sonnet-20241022": {
+        "maxTokens": 8192,
+        "contextWindow": 200000,
+        "supportsImages": true,
+        "supportsComputerUse": true,
+        "supportsPromptCache": true,
+        "inputPrice": 3.0,
+        "outputPrice": 15.0,
+        "cacheWritesPrice": 3.75,
+        "cacheReadsPrice": 0.3
+      },
+      "claude-3-5-haiku-20241022": {
+        "maxTokens": 8192,
+        "contextWindow": 200000,
+        "supportsImages": false,
+        "supportsPromptCache": true,
+        "inputPrice": 0.8,
+        "outputPrice": 4.0,
+        "cacheWritesPrice": 1.0,
+        "cacheReadsPrice": 0.08
+      },
+      "claude-3-opus-20240229": {
+        "maxTokens": 4096,
+        "contextWindow": 200000,
+        "supportsImages": true,
+        "supportsPromptCache": true,
+        "inputPrice": 15.0,
+        "outputPrice": 75.0,
+        "cacheWritesPrice": 18.75,
+        "cacheReadsPrice": 1.5
+      },
+      "claude-3-haiku-20240307": {
+        "maxTokens": 4096,
+        "contextWindow": 200000,
+        "supportsImages": true,
+        "supportsPromptCache": true,
+        "inputPrice": 0.25,
+        "outputPrice": 1.25,
+        "cacheWritesPrice": 0.3,
+        "cacheReadsPrice": 0.03
+      }
+    },
+    "bedrock": {
+      "anthropic.claude-3-5-sonnet-20241022-v2:0": {
+        "maxTokens": 8192,
+        "contextWindow": 200000,
+        "supportsImages": true,
+        "supportsComputerUse": true,
+        "supportsPromptCache": false,
+        "inputPrice": 3.0,
+        "outputPrice": 15.0
+      },
+      "anthropic.claude-3-5-haiku-20241022-v1:0": {
+        "maxTokens": 8192,
+        "contextWindow": 200000,
+        "supportsImages": false,
+        "supportsPromptCache": false,
+        "inputPrice": 1.0,
+        "outputPrice": 5.0
+      },
+      "anthropic.claude-3-5-sonnet-20240620-v1:0": {
+        "maxTokens": 8192,
+        "contextWindow": 200000,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 3.0,
+        "outputPrice": 15.0
+      },
+      "anthropic.claude-3-opus-20240229-v1:0": {
+        "maxTokens": 4096,
+        "contextWindow": 200000,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 15.0,
+        "outputPrice": 75.0
+      },
+      "anthropic.claude-3-sonnet-20240229-v1:0": {
+        "maxTokens": 4096,
+        "contextWindow": 200000,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 3.0,
+        "outputPrice": 15.0
+      },
+      "anthropic.claude-3-haiku-20240307-v1:0": {
+        "maxTokens": 4096,
+        "contextWindow": 200000,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 0.25,
+        "outputPrice": 1.25
+      }
+    },
+    "openrouter": {
+      "openRouterDefaultModelId": "anthropic/claude-3.5-sonnet",
+      "openRouterDefaultModelInfo": {
+        "maxTokens": 8192,
+        "contextWindow": 200000,
+        "supportsImages": true,
+        "supportsComputerUse": true,
+        "supportsPromptCache": true,
+        "inputPrice": 3.0,
+        "outputPrice": 15.0,
+        "cacheWritesPrice": 3.75,
+        "cacheReadsPrice": 0.3,
+        "description": "The new Claude 3.5 Sonnet delivers better-than-Opus capabilities, faster-than-Sonnet speeds, at the same Sonnet prices. Sonnet is particularly good at:\\n\\n- Coding: New Sonnet scores ~49% on SWE-Bench Verified, higher than the last best score, and without any fancy prompt scaffolding\\n- Data science: Augments human data science expertise; navigates unstructured data while using multiple tools for insights\\n- Visual processing: excelling at interpreting charts, graphs, and images, accurately transcribing text to derive insights beyond just the text alone\\n- Agentic tasks: exceptional tool use, making it great at agentic tasks (i.e. complex, multi-step problem solving tasks that require engaging with other systems)\\n\\n#multimodal"
+      }
+    },
+    "vertex": {
+      "claude-3-5-sonnet-v2@20241022": {
+        "maxTokens": 8192,
+        "contextWindow": 200000,
+        "supportsImages": true,
+        "supportsComputerUse": true,
+        "supportsPromptCache": false,
+        "inputPrice": 3.0,
+        "outputPrice": 15.0
+      },
+      "claude-3-5-sonnet@20240620": {
+        "maxTokens": 8192,
+        "contextWindow": 200000,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 3.0,
+        "outputPrice": 15.0
+      },
+      "claude-3-5-haiku@20241022": {
+        "maxTokens": 8192,
+        "contextWindow": 200000,
+        "supportsImages": false,
+        "supportsPromptCache": false,
+        "inputPrice": 1.0,
+        "outputPrice": 5.0
+      },
+      "claude-3-opus@20240229": {
+        "maxTokens": 4096,
+        "contextWindow": 200000,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 15.0,
+        "outputPrice": 75.0
+      },
+      "claude-3-haiku@20240307": {
+        "maxTokens": 4096,
+        "contextWindow": 200000,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 0.25,
+        "outputPrice": 1.25
+      }
+    },
+    "openai": {
+      "openAiModelInfoSaneDefaults": {
+        "maxTokens": -1,
+        "contextWindow": 128000,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 0,
+        "outputPrice": 0
+      }
+    },
+    "gemini": {
+      "gemini-2.0-flash-001": {
+        "maxTokens": 8192,
+        "contextWindow": 1048576,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 0,
+        "outputPrice": 0
+      },
+      "gemini-2.0-flash-lite-preview-02-05": {
+        "maxTokens": 8192,
+        "contextWindow": 1048576,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 0,
+        "outputPrice": 0
+      },
+      "gemini-2.0-pro-exp-02-05": {
+        "maxTokens": 8192,
+        "contextWindow": 2097152,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 0,
+        "outputPrice": 0
+      },
+      "gemini-2.0-flash-thinking-exp-01-21": {
+        "maxTokens": 65536,
+        "contextWindow": 1048576,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 0,
+        "outputPrice": 0
+      },
+      "gemini-2.0-flash-thinking-exp-1219": {
+        "maxTokens": 8192,
+        "contextWindow": 32767,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 0,
+        "outputPrice": 0
+      },
+      "gemini-2.0-flash-exp": {
+        "maxTokens": 8192,
+        "contextWindow": 1048576,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 0,
+        "outputPrice": 0
+      },
+      "gemini-1.5-flash-002": {
+        "maxTokens": 8192,
+        "contextWindow": 1048576,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 0,
+        "outputPrice": 0
+      },
+      "gemini-1.5-flash-exp-0827": {
+        "maxTokens": 8192,
+        "contextWindow": 1048576,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 0,
+        "outputPrice": 0
+      },
+      "gemini-1.5-flash-8b-exp-0827": {
+        "maxTokens": 8192,
+        "contextWindow": 1048576,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 0,
+        "outputPrice": 0
+      },
+      "gemini-1.5-pro-002": {
+        "maxTokens": 8192,
+        "contextWindow": 2097152,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 0,
+        "outputPrice": 0
+      },
+      "gemini-1.5-pro-exp-0827": {
+        "maxTokens": 8192,
+        "contextWindow": 2097152,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 0,
+        "outputPrice": 0
+      },
+      "gemini-exp-1206": {
+        "maxTokens": 8192,
+        "contextWindow": 2097152,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 0,
+        "outputPrice": 0
+      }
+    },
+    "openai-native": {
+      "o3-mini": {
+        "maxTokens": 100000,
+        "contextWindow": 200000,
+        "supportsImages": false,
+        "supportsPromptCache": false,
+        "inputPrice": 1.1,
+        "outputPrice": 4.4
+      },
+      "o1": {
+        "maxTokens": 100000,
+        "contextWindow": 200000,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 15,
+        "outputPrice": 60
+      },
+      "o1-preview": {
+        "maxTokens": 32768,
+        "contextWindow": 128000,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 15,
+        "outputPrice": 60
+      },
+      "o1-mini": {
+        "maxTokens": 65536,
+        "contextWindow": 128000,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 1.1,
+        "outputPrice": 4.4
+      },
+      "gpt-4o": {
+        "maxTokens": 4096,
+        "contextWindow": 128000,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 2.5,
+        "outputPrice": 10
+      },
+      "gpt-4o-mini": {
+        "maxTokens": 16384,
+        "contextWindow": 128000,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 0.15,
+        "outputPrice": 0.6
+      }
+    },
+    "deepseek": {
+      "deepseek-chat": {
+        "maxTokens": 8000,
+        "contextWindow": 64000,
+        "supportsImages": false,
+        "supportsPromptCache": true,
+        "inputPrice": 0,
+        "outputPrice": 0.28,
+        "cacheWritesPrice": 0.14,
+        "cacheReadsPrice": 0.014
+      },
+      "deepseek-reasoner": {
+        "maxTokens": 8000,
+        "contextWindow": 64000,
+        "supportsImages": false,
+        "supportsPromptCache": true,
+        "inputPrice": 0,
+        "outputPrice": 2.19,
+        "cacheWritesPrice": 0.55,
+        "cacheReadsPrice": 0.14
+      }
+    },
+    "qwen": {
+      "qwen-coder-plus-latest": {
+        "maxTokens": 129024,
+        "contextWindow": 131072,
+        "supportsImages": false,
+        "supportsPromptCache": false,
+        "inputPrice": 0.0035,
+        "outputPrice": 0.007,
+        "cacheWritesPrice": 0.0035,
+        "cacheReadsPrice": 0.007
+      },
+      "qwen-plus-latest": {
+        "maxTokens": 129024,
+        "contextWindow": 131072,
+        "supportsImages": false,
+        "supportsPromptCache": false,
+        "inputPrice": 0.0008,
+        "outputPrice": 0.002,
+        "cacheWritesPrice": 0.0004,
+        "cacheReadsPrice": 0.001
+      },
+      "qwen-turbo-latest": {
+        "maxTokens": 1000000,
+        "contextWindow": 1000000,
+        "supportsImages": false,
+        "supportsPromptCache": false,
+        "inputPrice": 0.0003,
+        "outputPrice": 0.0006,
+        "cacheWritesPrice": 0.00015,
+        "cacheReadsPrice": 0.0003
+      },
+      "qwen-max-latest": {
+        "maxTokens": 30720,
+        "contextWindow": 32768,
+        "supportsImages": false,
+        "supportsPromptCache": false,
+        "inputPrice": 0.0112,
+        "outputPrice": 0.0448,
+        "cacheWritesPrice": 0.0056,
+        "cacheReadsPrice": 0.0224
+      },
+      "qwen-coder-plus": {
+        "maxTokens": 129024,
+        "contextWindow": 131072,
+        "supportsImages": false,
+        "supportsPromptCache": false,
+        "inputPrice": 0.0035,
+        "outputPrice": 0.007,
+        "cacheWritesPrice": 0.0035,
+        "cacheReadsPrice": 0.007
+      },
+      "qwen-plus": {
+        "maxTokens": 129024,
+        "contextWindow": 131072,
+        "supportsImages": false,
+        "supportsPromptCache": false,
+        "inputPrice": 0.0008,
+        "outputPrice": 0.002,
+        "cacheWritesPrice": 0.0004,
+        "cacheReadsPrice": 0.001
+      },
+      "qwen-turbo": {
+        "maxTokens": 1000000,
+        "contextWindow": 1000000,
+        "supportsImages": false,
+        "supportsPromptCache": false,
+        "inputPrice": 0.0003,
+        "outputPrice": 0.0006,
+        "cacheWritesPrice": 0.00015,
+        "cacheReadsPrice": 0.0003
+      },
+      "qwen-max": {
+        "maxTokens": 30720,
+        "contextWindow": 32768,
+        "supportsImages": false,
+        "supportsPromptCache": false,
+        "inputPrice": 0.0112,
+        "outputPrice": 0.0448,
+        "cacheWritesPrice": 0.0056,
+        "cacheReadsPrice": 0.0224
+      }
+    },
+    "mistral": {
+      "mistral-large-2411": {
+        "maxTokens": 131000,
+        "contextWindow": 131000,
+        "supportsImages": false,
+        "supportsPromptCache": false,
+        "inputPrice": 2.0,
+        "outputPrice": 6.0
+      },
+      "pixtral-large-2411": {
+        "maxTokens": 131000,
+        "contextWindow": 131000,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 2.0,
+        "outputPrice": 6.0
+      },
+      "ministral-3b-2410": {
+        "maxTokens": 131000,
+        "contextWindow": 131000,
+        "supportsImages": false,
+        "supportsPromptCache": false,
+        "inputPrice": 0.04,
+        "outputPrice": 0.04
+      },
+      "ministral-8b-2410": {
+        "maxTokens": 131000,
+        "contextWindow": 131000,
+        "supportsImages": false,
+        "supportsPromptCache": false,
+        "inputPrice": 0.1,
+        "outputPrice": 0.1
+      },
+      "mistral-small-2501": {
+        "maxTokens": 32000,
+        "contextWindow": 32000,
+        "supportsImages": false,
+        "supportsPromptCache": false,
+        "inputPrice": 0.1,
+        "outputPrice": 0.3
+      },
+      "pixtral-12b-2409": {
+        "maxTokens": 131000,
+        "contextWindow": 131000,
+        "supportsImages": true,
+        "supportsPromptCache": false,
+        "inputPrice": 0.15,
+        "outputPrice": 0.15
+      },
+      "open-mistral-nemo-2407": {
+        "maxTokens": 131000,
+        "contextWindow": 131000,
+        "supportsImages": false,
+        "supportsPromptCache": false,
+        "inputPrice": 0.15,
+        "outputPrice": 0.15
+      },
+      "open-codestral-mamba": {
+        "maxTokens": 256000,
+        "contextWindow": 256000,
+        "supportsImages": false,
+        "supportsPromptCache": false,
+        "inputPrice": 0.15,
+        "outputPrice": 0.15
+      },
+      "codestral-2501": {
+        "maxTokens": 256000,
+        "contextWindow": 256000,
+        "supportsImages": false,
+        "supportsPromptCache": false,
+        "inputPrice": 0.3,
+        "outputPrice": 0.9
+      }
+    },
+    "litellm": {
+      "liteLlmDefaultModelId": "gpt-3.5-turbo",
+      "liteLlmModelInfoSaneDefaults": {
+        "maxTokens": 4096,
+        "contextWindow": 8192,
+        "supportsImages": false,
+        "supportsPromptCache": false,
+        "inputPrice": 0,
+        "outputPrice": 0
+      }
+    },
+      "ollama": {},
+      "lmstudio": {},
+      "requesty": {},
+      "together": {},
+      "vscode-lm": {}
+  }
