@@ -9,8 +9,8 @@ forked from newideas99/Deepseek-Thinking-Claude-3.5-Sonnet-CLINE-MCP
 1.  Clone this repository:
 
     ```bash
-    git clone https://github.com/your-repo/deepseek-thinking-claude-mcp.git
-    cd deepseek-thinking-claude-mcp
+    git clone https://github.com/your-repo/mcp-reasoning-coding.git
+    cd mcp-reasoning-coding
     ```
 
 2.  Install dependencies:
