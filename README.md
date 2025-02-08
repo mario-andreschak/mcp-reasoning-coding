@@ -29,8 +29,8 @@ forked from newideas99/Deepseek-Thinking-Claude-3.5-Sonnet-CLINE-MCP
     *   `OPENAI_API_KEY`: API key for OpenAI.
     *   `OPENAI_API_BASE_URL`: Base URL for the OpenAI API (if different from the default).
     *   `GEMINI_API_KEY`: API key for Google Gemini..
-    *   `VERTEX_CLIENT_EMAIL`: Client email for Vertex AI authentication.
-    *   `VERTEX_PRIVATE_KEY`: Private key for Vertex AI authentication.
+    *   `VERTEX_PROJECT_ID`: Vertex Project ID.
+    *   `VERTEX_REGION`: Vertext Region
 3.  Configure the `REASONING_PROVIDER`, `REASONING_MODEL`, `CODING_PROVIDER`, and `CODING_MODEL` environment variables in your `.env` file to specify the default models for reasoning and coding tasks. Refer to `src/providers.json` for available providers and models.
 
 # TODO: Implement client initialization for missing providers
