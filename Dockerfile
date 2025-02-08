@@ -5,6 +5,21 @@ FROM node:18-alpine AS builder
 # Set working directory
 WORKDIR /app
 
+# Define build arguments (with defaults) for all potential environment variables
+ARG OPENROUTER_API_KEY=""
+ARG ANTHROPIC_API_KEY=""
+ARG DEEPSEEK_API_KEY=""
+ARG OPENAI_API_KEY=""
+ARG OPENAI_API_BASE_URL=""
+ARG GEMINI_API_KEY=""
+ARG VERTEX_PROJECT_ID=""
+ARG VERTEX_REGION=""
+ARG REASONING_PROVIDER=""
+ARG REASONING_MODEL=""
+ARG CODING_PROVIDER=""
+ARG CODING_MODEL=""
+ARG NODE_ENV="production"
+
 # Copy package.json and package-lock.json to the working directory
 COPY package.json package-lock.json ./
 
@@ -32,8 +47,20 @@ COPY package.json package-lock.json ./
 # Install only production dependencies
 RUN npm install --omit=dev
 
-# Environment variables
-ENV NODE_ENV=production
+# Environment variables (set from ARGs)
+ENV OPENROUTER_API_KEY=$OPENROUTER_API_KEY
+ENV ANTHROPIC_API_KEY=$ANTHROPIC_API_KEY
+ENV DEEPSEEK_API_KEY=$DEEPSEEK_API_KEY
+ENV OPENAI_API_KEY=$OPENAI_API_KEY
+ENV OPENAI_API_BASE_URL=$OPENAI_API_BASE_URL
+ENV GEMINI_API_KEY=$GEMINI_API_KEY
+ENV VERTEX_PROJECT_ID=$VERTEX_PROJECT_ID
+ENV VERTEX_REGION=$VERTEX_REGION
+ENV REASONING_PROVIDER=$REASONING_PROVIDER
+ENV REASONING_MODEL=$REASONING_MODEL
+ENV CODING_PROVIDER=$CODING_PROVIDER
+ENV CODING_MODEL=$CODING_MODEL
+ENV NODE_ENV=$NODE_ENV
 
 # Entrypoint command to run the MCP server
 ENTRYPOINT ["node", "build/index.js"]

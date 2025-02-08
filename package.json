@@ -1,7 +1,7 @@
 {
-  "name": "deepseek-thinking-claude-3-5-sonnet-cline-mcp",
+  "name": "mcp-reasoning-coding",
   "version": "0.1.0",
-  "description": "MCP server that combines DeepSeek's reasoning with Claude 3.5 Sonnet's response generation through Cline",
+  "description": "MCP server that combines reasoning with response generation through Cline",
   "private": true,
   "type": "module",
   "bin": {
