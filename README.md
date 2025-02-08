@@ -2,6 +2,8 @@
 
 This is a simple MCP (Model Context Protocol) server that integrates with various language models, including DeepSeek and Claude (via OpenRouter), as well as OpenAI, Gemini, and Vertex AI. It provides a basic interface for generating responses using these models.
 
+forked from newideas99/Deepseek-Thinking-Claude-3.5-Sonnet-CLINE-MCP
+
 ## Installation
 
 1.  Clone this repository:
