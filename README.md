@@ -1,4 +1,5 @@
 # Reasoning-Coder MCP Server
+[![smithery badge](https://smithery.ai/badge/@mario-andreschak/mcp-reasoning-coding)](https://smithery.ai/server/@mario-andreschak/mcp-reasoning-coding)
 
 This is a simple MCP (Model Context Protocol) server that integrates with various language models, including DeepSeek and Claude (via OpenRouter), as well as OpenAI, Gemini, and Vertex AI. It provides a basic interface for generating responses using these models.
 
@@ -29,6 +30,14 @@ forked from newideas99/Deepseek-Thinking-Claude-3.5-Sonnet-CLINE-MCP
     * repetition_penalty: 1.0 to prevent repetition
 
 ## Installation
+
+### Installing via Smithery
+
+To install Reasoning-Coder for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@mario-andreschak/mcp-reasoning-coding):
+
+```bash
+npx -y @smithery/cli install @mario-andreschak/mcp-reasoning-coding --client claude
+```
 
 1.  Clone this repository:
 
