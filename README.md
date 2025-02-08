@@ -1,4 +1,4 @@
-# DeepSeek-Claude MCP Server
+# Reasoning-Coder MCP Server
 
 This is a simple MCP (Model Context Protocol) server that integrates with various language models, including DeepSeek and Claude (via OpenRouter), as well as OpenAI, Gemini, and Vertex AI. It provides a basic interface for generating responses using these models.
 
