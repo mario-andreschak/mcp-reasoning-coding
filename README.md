@@ -1,4 +1,6 @@
-# Reasoning & Coding MCP Server
+# Reasoning-Coder MCP Server
+[![smithery badge](https://smithery.ai/badge/@mario-andreschak/mcp-reasoning-coding)](https://smithery.ai/server/@mario-andreschak/mcp-reasoning-coding)
+
 
 [![smithery badge](https://smithery.ai/badge/@newideas99/Deepseek-Thinking-Claude-3.5-Sonnet-CLINE-MCP)](https://smithery.ai/server/@newideas99/Deepseek-Thinking-Claude-3.5-Sonnet-CLINE-MCP)
 
@@ -64,7 +66,16 @@ The original project was specifically designed to use DeepSeek R1 for reasoning 
 
 ## Installation
 
-1.  **Clone the Repository:**
+### Installing via Smithery
+
+To install Reasoning-Coder for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@mario-andreschak/mcp-reasoning-coding):
+
+```bash
+npx -y @smithery/cli install @mario-andreschak/mcp-reasoning-coding --client claude
+```
+
+### Manual Installation
+1.  **Clone this repository**:
 
     ```bash
     git clone https://github.com/mario-andreschak/mcp-reasoning-coding.git
