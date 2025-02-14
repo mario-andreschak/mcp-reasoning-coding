@@ -1,33 +1,68 @@
 # Reasoning-Coder MCP Server
 [![smithery badge](https://smithery.ai/badge/@mario-andreschak/mcp-reasoning-coding)](https://smithery.ai/server/@mario-andreschak/mcp-reasoning-coding)
 
-This is a simple MCP (Model Context Protocol) server that integrates with various language models, including DeepSeek and Claude (via OpenRouter), as well as OpenAI, Gemini, and Vertex AI. It provides a basic interface for generating responses using these models.
 
-forked from newideas99/Deepseek-Thinking-Claude-3.5-Sonnet-CLINE-MCP
+[![smithery badge](https://smithery.ai/badge/@newideas99/Deepseek-Thinking-Claude-3.5-Sonnet-CLINE-MCP)](https://smithery.ai/server/@newideas99/Deepseek-Thinking-Claude-3.5-Sonnet-CLINE-MCP)
 
+This is a Model Context Protocol (MCP) server that provides a flexible and configurable two-stage reasoning and response generation system.  It's a fork of the original [Deepseek-Thinking-Claude-3.5-Sonnet-CLINE-MCP](link-to-original-repo) project, significantly expanding its capabilities by supporting multiple AI providers and models for both reasoning and coding/response generation.
+
+## Key Changes and Improvements Compared to the Original
+
+The original project was specifically designed to use DeepSeek R1 for reasoning and Claude 3.5 Sonnet for response generation, both accessed exclusively through OpenRouter.  This fork generalizes the architecture to support a wider range of providers and models.  Here's a breakdown of the key differences:
+
+*   **Multi-Provider Support:**  Instead of being locked into OpenRouter, this fork can now use:
+    *   OpenRouter
+    *   OpenAI
+    *   Anthropic (Claude)
+    *   DeepSeek
+    *   Google Gemini
+    *   Google Vertex AI
+
+*   **Configurable Reasoning and Coding Models:** The original hardcoded DeepSeek for reasoning and Claude for the final response.  This fork allows you to configure *both* the reasoning and coding/response generation models independently.  You can mix and match providers. For example, you could use Gemini for reasoning and OpenAI for the final response.
+
+*   **`providers.json` Configuration:**  A new `providers.json` file is introduced to manage the available models and their specific parameters (temperature, top_p, etc.) for each provider.  This makes it easy to add new models or tweak existing ones without modifying the core code.
+
+*   **Environment Variable Configuration:** The choice of reasoning and coding providers/models is now primarily controlled through environment variables:
+    *   `REASONING_PROVIDER`:  Specifies the provider for the reasoning stage (e.g., `openai`, `gemini`, `deepseek`, `openrouter`, `anthropic`, `vertex`).
+    *   `REASONING_MODEL`:  Specifies the model to use for reasoning (e.g., `gpt-4`, `gemini-pro`, `deepseek/deepseek-r1`).
+    *   `CODING_PROVIDER`:  Specifies the provider for the coding/response generation stage.
+    *   `CODING_MODEL`: Specifies the model for the final response.
+
+*   **Dynamic Client Initialization:**  The code now dynamically initializes only the necessary API clients based on the `REASONING_PROVIDER` and `CODING_PROVIDER` settings.  This avoids unnecessary initialization and dependencies.
+
+*   **Unified `getReasoning` and `getFinalResponse`:** The provider-specific logic is abstracted into `getReasoning` and `getFinalResponse` functions, making the core task processing logic provider-agnostic.
+
+* **Retains core MCP structure:** The fork retains the core structure of using MCP, so it will integrate with any MCP client, like the original implementation. It defines the `generate_response` and `check_response_status` tools in the same way.
+
+* **Retains Cline integration:** Like the original, the fork is intended for integration with Cline, the Claude Desktop extension.
+
+* **Retains Conversation History Feature:** The forked implementation has kept the feature of using the conversation history of Cline for context.
+
+* **No Hardcoded Models:** There are no hardcoded models in the new implementation, the models are defined in the .env file and providers.json
 
 ## Features
 
-- **Two-Stage Processing**:
-  - Uses DeepSeek R1 for initial reasoning (50k character context)
-  - Uses Claude 3.5 Sonnet for final response (600k character context)
-  - Both models accessed through OpenRouter's unified API
-  - Injects DeepSeek's reasoning tokens into Claude's context
+*   **Two-Stage Processing:**
+    *   Uses a configurable model for initial reasoning (e.g., DeepSeek, GPT-4, Gemini Pro).
+    *   Uses a configurable model for final response/code generation (e.g., Claude, GPT-4, DeepSeek Chat).
+    *   Injects the reasoning from the first stage into the context of the second stage.
 
-- **Smart Conversation Management**:
-  - Detects active conversations using file modification times
-  - Handles multiple concurrent conversations
-  - Filters out ended conversations automatically
-  - Supports context clearing when needed
+*   **Flexible Provider and Model Selection:**
+    *   Choose from OpenRouter, OpenAI, Anthropic, DeepSeek, Gemini, and Vertex AI for both reasoning and coding stages.
+    *   Easily configure models and their parameters via `providers.json` and environment variables.
 
-- **Optimized Parameters**:
-  - Model-specific context limits:
-    * DeepSeek: 50,000 characters for focused reasoning
-    * Claude: 600,000 characters for comprehensive responses
-  - Recommended settings:
-    * temperature: 0.7 for balanced creativity
-    * top_p: 1.0 for full probability distribution
-    * repetition_penalty: 1.0 to prevent repetition
+*   **Smart Conversation Management (Inherited from Original):**
+    *   Detects active Cline conversations using file modification times.
+    *   Handles multiple concurrent conversations.
+    *   Filters out ended conversations automatically.
+    *   Supports context clearing.
+
+*   **Optimized Parameters (Configurable):**
+    *   Model-specific context limits are respected (e.g., 50,000 characters for DeepSeek reasoning, larger limits for response models).
+    *   Parameters like `temperature`, `top_p`, and `repetition_penalty` are configurable per model in `providers.json`.
+
+*   **Response Polling (Inherited from Original):**
+    *   Uses a polling mechanism with `generate_response` (to get a task ID) and `check_response_status` (to check the status).  This handles the asynchronous nature of LLM calls.
 
 ## Installation
 
@@ -39,33 +74,101 @@ To install Reasoning-Coder for Claude Desktop automatically via [Smithery](https
 npx -y @smithery/cli install @mario-andreschak/mcp-reasoning-coding --client claude
 ```
 
-1.  Clone this repository:
+### Manual Installation
+1.  **Clone this repository**:
 
     ```bash
-    git clone https://github.com/your-repo/mcp-reasoning-coding.git
-    cd mcp-reasoning-coding
+    git clone https://github.com/mario-andreschak/mcp-reasoning-coding.git
+    cd /mcp-reasoning-coding
     ```
 
-2.  Install dependencies:
+2.  **Install Dependencies:**
 
     ```bash
     npm install
     ```
 
-## Configuration
+3.  **Create a `.env` File:**  This file will hold your API keys and provider/model selections.  Example:
 
-1.  Create a `.env` file in the root directory of the project, based on the provided `.env.example` file.
-2.  Fill in the required API keys for the providers you want to use:
-    *   `OPENROUTER_API_KEY`: API key for OpenRouter.
-    *   `ANTHROPIC_API_KEY`: API key for Anthropic.
-    *   `DEEPSEEK_API_KEY`: API key for DeepSeek.
-    *   `OPENAI_API_KEY`: API key for OpenAI.
-    *   `OPENAI_API_BASE_URL`: Base URL for the OpenAI API (if different from the default).
-    *   `GEMINI_API_KEY`: API key for Google Gemini..
-    *   `VERTEX_PROJECT_ID`: Vertex Project ID.
-    *   `VERTEX_REGION`: Vertext Region
-3.  Configure the `REASONING_PROVIDER`, `REASONING_MODEL`, `CODING_PROVIDER`, and `CODING_MODEL` environment variables in your `.env` file to specify the default models for reasoning and coding tasks. Refer to `src/providers.json` for available providers and models.
+    ```env
+    # --- Required API Keys (at least one) ---
+    OPENROUTER_API_KEY=your_openrouter_key
+    OPENAI_API_KEY=your_openai_key
+    ANTHROPIC_API_KEY=your_anthropic_key
+    DEEPSEEK_API_KEY=your_deepseek_key
+    GEMINI_API_KEY=your_gemini_key
+    VERTEX_PROJECT_ID=your_vertex_project_id # For Vertex AI
+    VERTEX_REGION=your_vertex_region         # For Vertex AI
 
+    # --- Provider and Model Selection ---
+    REASONING_PROVIDER=openrouter
+    REASONING_MODEL=deepseek/deepseek-r1
+    CODING_PROVIDER=openrouter
+    CODING_MODEL=anthropic/claude-3.5-sonnet:beta
+    ```
+
+    **Important:**  You only need to provide API keys for the providers you intend to use.  If you're only using OpenAI, you don't need an `OPENROUTER_API_KEY`, for example.
+
+4.  **`providers.json` File:**  This file defines the available models for each provider and their parameters. Place this file in the `src` folder. Example (`src/providers.json`):
+
+    ```json
+    {
+      "openrouter": {
+        "deepseek/deepseek-r1": {
+          "temperature": 0.7,
+          "top_p": 1
+        },
+        "anthropic/claude-3.5-sonnet:beta": {
+          "temperature": 0.7,
+          "top_p": 1,
+          "repetition_penalty": 1
+        },
+        "deepseek/deepseek-chat":{
+          "temperature": 0.7,
+          "top_p": 1
+        }
+      },
+      "openai": {
+        "gpt-4": {
+          "temperature": 0.7,
+          "top_p": 1
+        },
+        "gpt-3.5-turbo": {
+          "temperature": 0.7,
+          "top_p": 1
+        }
+      },
+        "anthropic": {
+          "claude-3-opus-20240229": {
+            "temperature": 0.7,
+            "top_p": 1
+          }
+        },
+        "deepseek": {
+          "deepseek-coder": {
+            "temperature": 0.7,
+            "top_p": 1
+          }
+        },
+        "gemini":{
+          "gemini-pro":{
+
+          }
+        },
+        "vertex": {
+          "gemini-1.5-pro-002":{
+
+          }
+        }
+    }
+    ```
+    *   **`extra_params`:** You can add provider-specific parameters within the model definition using the `extra_params` key.  Consult the API documentation for each provider to see what options are available.
+
+5.  **Build the server:**
+
+    ```bash
+    npm run build
+    ```
 
 ## Usage with Cline
 
@@ -74,12 +177,11 @@ Add to your Cline MCP settings (usually in `~/.vscode/globalStorage/saoudrizwan.
 ```json
 {
   "mcpServers": {
-    "deepseek-claude": {
+    "reasoning-coding": {
       "command": "/path/to/node",
-      "args": ["/path/to/mcp-reasoning-coding/build/index.js"],
+      "args": ["/path/to/your-fork/build/index.js"],  // Adjust path
       "env": {
-        "OPENROUTER_API_KEY": "your_key_here"
-        # ... more env variables here!
+        // Your .env variables will be inherited, so no need to duplicate them here
       },
       "disabled": false,
       "autoApprove": []
@@ -88,26 +190,28 @@ Add to your Cline MCP settings (usually in `~/.vscode/globalStorage/saoudrizwan.
 }
 ```
 
-## Tool Usage
+Replace `/path/to/node` and `/path/to/your-fork/build/index.js` with the correct paths.
 
-The server provides two tools for generating and monitoring responses:
+## Tool Usage (Same as Original)
 
-### generate_response
+The server provides the same two tools as the original:
 
-Main tool for generating responses with the following parameters:
+### `generate_response`
+
+Generates a response using the configured reasoning and coding models.
 
 ```typescript
 {
   "prompt": string,           // Required: The question or prompt
-  "showReasoning"?: boolean, // Optional: Show DeepSeek's reasoning process
+  "showReasoning"?: boolean, // Optional: Show the reasoning process
   "clearContext"?: boolean,  // Optional: Clear conversation history
   "includeHistory"?: boolean // Optional: Include Cline conversation history
 }
 ```
 
-### check_response_status
+### `check_response_status`
 
-Tool for checking the status of a response generation task:
+Checks the status of a response generation task.
 
 ```typescript
 {
@@ -115,48 +219,40 @@ Tool for checking the status of a response generation task:
 }
 ```
 
-### Response Polling
+### Response Polling (Same as Original)
 
-The server uses a polling mechanism to handle long-running requests:
+1.  **Initial Request:** Call `generate_response` to get a `taskId`.
 
-1. Initial Request:
-   - `generate_response` returns immediately with a task ID
-   - Response format: `{"taskId": "uuid-here"}`
+    ```typescript
+    const result = await use_mcp_tool({
+      server_name: "reasoning-coding",
+      tool_name: "generate_response",
+      arguments: {
+        prompt: "Explain the theory of relativity.",
+        showReasoning: true
+      }
+    });
 
-2. Status Checking:
-   - Use `check_response_status` to poll the task status
-   - **Note:** Responses can take up to 60 seconds to complete
-   - Status progresses through: pending → reasoning → responding → complete
+    const taskId = JSON.parse(result.content[0].text).taskId;
+    ```
 
-Example usage in Cline:
-```typescript
-// Initial request
-const result = await use_mcp_tool({
-  server_name: "deepseek-claude",
-  tool_name: "generate_response",
-  arguments: {
-    prompt: "What is quantum computing?",
-    showReasoning: true
-  }
-});
+2.  **Status Checking:**  Poll `check_response_status` with the `taskId` until the status is `complete` (or `error`).
 
-// Get taskId from result
-const taskId = JSON.parse(result.content[0].text).taskId;
+    ```typescript
+    const status = await use_mcp_tool({
+      server_name: "reasoning-coding",
+      tool_name: "check_response_status",
+      arguments: { taskId }
+    });
 
-// Poll for status (may need multiple checks over ~60 seconds)
-const status = await use_mcp_tool({
-  server_name: "deepseek-claude",
-  tool_name: "check_response_status",
-  arguments: { taskId }
-});
-
-// Example status response when complete:
-{
-  "status": "complete",
-  "reasoning": "...",  // If showReasoning was true
-  "response": "..."    // The final response
-}
-```
+    // Example status response when complete:
+    {
+      "status": "complete",
+      "reasoning": "...",  // If showReasoning was true
+      "response": "..."    // The final response
+      "error": undefined   // Will have a value if an error occurred
+    }
+    ```
 
 ## Development
 
@@ -165,78 +261,39 @@ For development with auto-rebuild:
 npm run watch
 ```
 
-## How It Works
+## How It Works (Expanded)
 
-1. **Reasoning Stage (DeepSeek R1)**:
-   - Uses OpenRouter's reasoning tokens feature
-   - Prompt is modified to output 'done' while capturing reasoning
-   - Reasoning is extracted from response metadata
+1.  **Reasoning Stage:**
+    *   The `getReasoning` function is called with the user's prompt (and potentially Cline conversation history).
+    *   Based on the `REASONING_PROVIDER` environment variable, the appropriate provider-specific function (e.g., `getReasoningOpenAI`, `getReasoningGemini`) is called.
+    *   The selected model (from `REASONING_MODEL`) is used to generate the reasoning.
+    *   The reasoning is returned.
 
-2. **Response Stage (Claude 3.5 Sonnet)**:
-   - Receives the original prompt and DeepSeek's reasoning
-   - Generates final response incorporating the reasoning
-   - Maintains conversation context and history
+2.  **Response Stage:**
+    *   The `getFinalResponse` function is called with the original prompt and the reasoning from the first stage.
+    *   Based on the `CODING_PROVIDER` environment variable, the appropriate provider-specific function is called.
+    *   The selected model (from `CODING_MODEL`) generates the final response, incorporating the reasoning.
+    *   The response is returned.
 
-# TODO: Implement client initialization for missing providers
-
-The following providers are listed in `providers.json` but do not have corresponding client initialization logic in `src/index.ts`:
-Do not use them yet, or contribute!
-
--   bedrock
--   openai-native
--   qwen
--   mistral
--   litellm
--   ollama
--   lmstudio
--   requesty
--   together
--   vscode-lm
-
-These providers should be implemented to ensure full functionality.
-## Usage
-
-1.  Start the server:
-
-    ```bash
-    npm start
-    ```
-
-2.  The server will listen for incoming requests on stdin. You can interact with it using the MCP protocol.
-
-### Supported Tools
-
-The server currently supports the following tools:
-
-*   `generate_response`: Generates a response based on the provided prompt.
-    *   `prompt`: (string, required) The user's input prompt.
-    *   `showReasoning`: (boolean, optional) Whether to include reasoning in the response (default: false).
-    *   `clearContext`: (boolean, optional) Whether to clear the conversation history before this request (default: false).
-    *   `includeHistory`: (boolean, optional) Whether to include Cline conversation history for context (default: true).
-    *   `check_response_status`: Checks the status of a response generation task.
-    *   `taskId`: (string, required) The task ID returned by `generate_response`.
-
-## Supported Providers and Models
-
-The server supports the following providers and models (configured in `src/providers.json`):
-
-*   OpenRouter
-*   Anthropic
-*   DeepSeek
-*   OpenAI
-*   Gemini
-*   Vertex AI
-
-See `src/providers.json` for the complete list of models and their capabilities.
-
-## Error Handling
-
-The server will return error responses in the MCP format if there are any issues with the request or the API calls.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit pull requests or open issues.
+3.  **MCP Handling:** The `ReasoningCodingServer` class handles the MCP communication, task management, and context management. It uses the `getReasoning` and `getFinalResponse` functions to orchestrate the two-stage process.
 
 ## License
 
-This project is licensed under the MIT License - see the `LICENSE` file for details.
+MIT License - See LICENSE file for details.
+
+## Credits
+
+*   Based on the original Deepseek-Thinking-Claude-3.5-Sonnet-CLINE-MCP project.
+*   Inspired by the RAT (Retrieval Augmented Thinking) concept by [Skirano](https://x.com/skirano/status/1881922469411643413).
+```
+
+Key improvements in this README:
+
+*   **Clearer Title:**  A more descriptive title reflects the expanded functionality.
+*   **Detailed Comparison:**  A dedicated section highlights the differences between the fork and the original.
+*   **Comprehensive Installation:**  Instructions are more thorough, covering `.env` and `providers.json` setup.
+*   **Provider/Model Explanation:**  The roles of environment variables and `providers.json` are clearly explained.
+*   **Example `providers.json`:** A complete example helps users get started.
+*   **Updated Usage:**  Reflects the new server name and configuration.
+*   **Expanded "How It Works":**  Provides a more detailed explanation of the internal workings.
+*   **Corrected filepaths:** Uses correct filepaths to the providers file
