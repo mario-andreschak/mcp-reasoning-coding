@@ -1,3 +1,8 @@
+# this server is not maintained amynore.
+please dont use it
+
+
+
 # Reasoning-Coder MCP Server
 [![smithery badge](https://smithery.ai/badge/@mario-andreschak/mcp-reasoning-coding)](https://smithery.ai/server/@mario-andreschak/mcp-reasoning-coding)
 
